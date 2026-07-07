@@ -33,4 +33,8 @@ public class CountryService {
     public void deleteCountry(String code) {
         countryRepository.deleteById(code);
     }
+
+    public Country getCountryByName(String name) {
+        return countryRepository.findByName(name);
+    }
 }

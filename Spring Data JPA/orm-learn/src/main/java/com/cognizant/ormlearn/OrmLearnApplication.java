@@ -20,12 +20,9 @@ public class OrmLearnApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        System.out.println("Before Delete:");
-        countryService.getAllCountries().forEach(System.out::println);
+        Country country = countryService.getCountryByName("Bharat");
 
-        countryService.deleteCountry("JP");
+        System.out.println(country);
 
-        System.out.println("\nAfter Delete:");
-        countryService.getAllCountries().forEach(System.out::println);
     }
 }
