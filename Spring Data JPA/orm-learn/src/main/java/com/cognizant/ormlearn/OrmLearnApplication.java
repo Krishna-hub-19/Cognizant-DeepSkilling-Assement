@@ -20,12 +20,8 @@ public class OrmLearnApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        Country country = new Country("IN", "India");
+        Country country = countryService.getCountry("IN").orElse(null);
 
-        countryService.addCountry(country);
-
-        System.out.println("Country Saved Successfully!");
-
-        System.out.println(countryService.getAllCountries());
+        System.out.println(country);
     }
 }
