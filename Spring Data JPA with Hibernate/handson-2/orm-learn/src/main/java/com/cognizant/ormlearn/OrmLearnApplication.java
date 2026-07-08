@@ -20,7 +20,8 @@ public class OrmLearnApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        countryService.searchCountriesSorted("ou")
+        countryService.searchCountriesStartingWith("Z")
                 .forEach(System.out::println);
+
     }
 }

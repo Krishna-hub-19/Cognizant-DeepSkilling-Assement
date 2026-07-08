@@ -45,4 +45,8 @@ public class CountryService {
     public List<Country> searchCountriesSorted(String text) {
         return countryRepository.findByNameContainingOrderByNameAsc(text);
     }
+
+    public List<Country> searchCountriesStartingWith(String prefix) {
+        return countryRepository.findByNameStartingWith(prefix);
+    }
 }
