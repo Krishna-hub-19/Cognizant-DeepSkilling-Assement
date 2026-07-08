@@ -13,5 +13,5 @@ public interface CountryRepository extends JpaRepository<Country, String> {
 
     List<Country> findByNameContaining(String text);
 
-
+    List<Country> findByNameContainingOrderByNameAsc(String text);
 }
