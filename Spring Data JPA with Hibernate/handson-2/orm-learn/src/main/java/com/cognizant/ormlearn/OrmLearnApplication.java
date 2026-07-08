@@ -1,17 +1,22 @@
 package com.cognizant.ormlearn;
 
-import com.cognizant.ormlearn.model.Country;
-import com.cognizant.ormlearn.service.CountryService;
+import com.cognizant.ormlearn.model.Stock;
+import com.cognizant.ormlearn.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class OrmLearnApplication implements CommandLineRunner {
 
-    @Autowired
-    private CountryService countryService;
+    private final StockService stockService;
+
+    public OrmLearnApplication(StockService stockService) {
+        this.stockService = stockService;
+    }
+
 
     public static void main(String[] args) {
         SpringApplication.run(OrmLearnApplication.class, args);
@@ -19,9 +24,5 @@ public class OrmLearnApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-
-        countryService.searchCountriesStartingWith("Z")
-                .forEach(System.out::println);
-
     }
 }
