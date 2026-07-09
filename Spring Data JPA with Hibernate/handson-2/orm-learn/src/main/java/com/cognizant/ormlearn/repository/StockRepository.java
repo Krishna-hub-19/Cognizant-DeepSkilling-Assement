@@ -23,4 +23,7 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
 
 
     List<Stock> findTop3ByOrderByVolumeDesc();
+
+
+    List<Stock> findTop3ByCodeOrderByCloseAsc(String code);
 }

@@ -26,7 +26,7 @@ public class OrmLearnApplication implements CommandLineRunner {
     public void run(String... args) {
 
         stockService
-                .getTop3HighestVolumeStocks()
+                .getLowestNetflixStocks()
                 .forEach(System.out::println);
 
     }

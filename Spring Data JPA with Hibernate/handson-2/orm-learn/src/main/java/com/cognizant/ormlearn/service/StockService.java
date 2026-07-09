@@ -45,4 +45,10 @@ public class StockService {
         return stockRepository.findTop3ByOrderByVolumeDesc();
     }
 
+
+    public List<Stock> getLowestNetflixStocks() {
+
+        return stockRepository.findTop3ByCodeOrderByCloseAsc("NFLX");
+
+    }
 }
