@@ -40,4 +40,9 @@ public class StockService {
 
     }
 
+
+    public List<Stock> getTop3HighestVolumeStocks() {
+        return stockRepository.findTop3ByOrderByVolumeDesc();
+    }
+
 }

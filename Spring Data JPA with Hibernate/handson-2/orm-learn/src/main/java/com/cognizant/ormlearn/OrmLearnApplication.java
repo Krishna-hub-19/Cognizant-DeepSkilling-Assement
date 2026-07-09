@@ -26,7 +26,7 @@ public class OrmLearnApplication implements CommandLineRunner {
     public void run(String... args) {
 
         stockService
-                .getGoogleStocksAbove1250()
+                .getTop3HighestVolumeStocks()
                 .forEach(System.out::println);
 
     }
