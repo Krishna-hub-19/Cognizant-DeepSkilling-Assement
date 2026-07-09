@@ -14,4 +14,10 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
             LocalDate startDate,
             LocalDate endDate
     );
+
+
+    List<Stock> findByCodeAndCloseGreaterThan(
+            String code,
+            double close
+    );
 }

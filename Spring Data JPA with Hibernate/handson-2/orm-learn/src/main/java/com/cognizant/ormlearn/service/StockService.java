@@ -30,4 +30,14 @@ public class StockService {
 
     }
 
+
+    public List<Stock> getGoogleStocksAbove1250() {
+
+        return stockRepository.findByCodeAndCloseGreaterThan(
+                "GOOGL",
+                1250
+        );
+
+    }
+
 }

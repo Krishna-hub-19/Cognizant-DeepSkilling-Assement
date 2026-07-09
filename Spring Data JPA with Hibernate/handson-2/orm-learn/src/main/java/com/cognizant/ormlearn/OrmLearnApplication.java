@@ -26,7 +26,7 @@ public class OrmLearnApplication implements CommandLineRunner {
     public void run(String... args) {
 
         stockService
-                .getFacebookStocksForSeptember2019()
+                .getGoogleStocksAbove1250()
                 .forEach(System.out::println);
 
     }
