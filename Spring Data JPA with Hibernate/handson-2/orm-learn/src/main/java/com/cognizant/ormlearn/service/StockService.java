@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.time.LocalDate;
-import java.util.Optional;
 
 
 @Service
@@ -18,6 +17,17 @@ public class StockService {
 
     public List<Stock> getAllStocks() {
         return stockRepository.findAll();
+    }
+
+
+    public List<Stock> getFacebookStocksForSeptember2019() {
+
+        return stockRepository.findByCodeAndDateBetween(
+                "FB",
+                LocalDate.of(2019, 9, 1),
+                LocalDate.of(2019, 9, 30)
+        );
+
     }
 
 }
