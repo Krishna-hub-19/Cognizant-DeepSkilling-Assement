@@ -1,0 +1,52 @@
+package com.cognizant.ormlearn.service;
+
+import com.cognizant.ormlearn.model.Country;
+import com.cognizant.ormlearn.repository.CountryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class CountryService {
+
+    @Autowired
+    private CountryRepository countryRepository;
+
+    public List<Country> getAllCountries() {
+        return countryRepository.findAll();
+    }
+
+    public Optional<Country> getCountry(String code) {
+        return countryRepository.findById(code);
+    }
+
+    public Country addCountry(Country country) {
+        return countryRepository.save(country);
+    }
+
+    public Country updateCountry(Country country) {
+        return countryRepository.save(country);
+    }
+
+    public void deleteCountry(String code) {
+        countryRepository.deleteById(code);
+    }
+
+    public Country getCountryByName(String name) {
+        return countryRepository.findByName(name);
+    }
+
+    public List<Country> searchCountries(String text) {
+        return countryRepository.findByNameContaining(text);
+    }
+
+    public List<Country> searchCountriesSorted(String text) {
+        return countryRepository.findByNameContainingOrderByNameAsc(text);
+    }
+
+    public List<Country> searchCountriesStartingWith(String prefix) {
+        return countryRepository.findByNameStartingWith(prefix);
+    }
+}
