@@ -34,13 +34,33 @@ public class OrmLearnApplication implements CommandLineRunner {
         skillService = context.getBean(SkillService.class);
 
 //      testGetEmployee();
-        testAddEmployee();
+//      testAddEmployee();
+        testUpdateEmployee();
     }
 
     @Override
     public void run(String... args) {
         // Exercise 2 code commented out
     }
+
+
+    private static void testUpdateEmployee() {
+
+        LOGGER.info("Start");
+
+        Employee employee = employeeService.get(1);
+
+        Department department = departmentService.get(2);
+
+        employee.setDepartment(department);
+
+        employeeService.save(employee);
+
+        LOGGER.info("Employee: {}", employee);
+
+        LOGGER.info("End");
+    }
+
 
     /*
     private static void testGetEmployee() {
@@ -58,7 +78,7 @@ public class OrmLearnApplication implements CommandLineRunner {
     */
 
 
-
+    /*
     private static void testAddEmployee() {
 
         LOGGER.info("Start");
@@ -82,4 +102,5 @@ public class OrmLearnApplication implements CommandLineRunner {
 
         LOGGER.info("End");
     }
+     */
 }
