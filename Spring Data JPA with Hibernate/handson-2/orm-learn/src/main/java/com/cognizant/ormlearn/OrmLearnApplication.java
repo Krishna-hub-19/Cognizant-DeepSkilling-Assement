@@ -2,6 +2,7 @@ package com.cognizant.ormlearn;
 
 import com.cognizant.ormlearn.model.Department;
 import com.cognizant.ormlearn.model.Employee;
+import com.cognizant.ormlearn.model.Skill;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,10 +34,12 @@ public class OrmLearnApplication implements CommandLineRunner {
         departmentService = context.getBean(DepartmentService.class);
         skillService = context.getBean(SkillService.class);
 
-      testGetEmployee();
+//      testGetEmployee();
 //      testAddEmployee();
 //      testUpdateEmployee();
 //      testGetDepartment();
+        testAddSkillToEmployee();
+
 
     }
 
@@ -45,6 +48,26 @@ public class OrmLearnApplication implements CommandLineRunner {
         // Exercise 2 code commented out
     }
 
+    private static void testAddSkillToEmployee() {
+
+        LOGGER.info("Start");
+
+        Employee employee = employeeService.get(1);
+
+        Skill skill = skillService.get(5);
+
+        employee.getSkillList().add(skill);
+
+        employeeService.save(employee);
+
+        LOGGER.info("Employee: {}", employee);
+
+        LOGGER.info("Skills: {}", employee.getSkillList());
+
+        LOGGER.info("End");
+    }
+
+    /*
     private static void testGetEmployee() {
 
         LOGGER.info("Start");
@@ -59,6 +82,8 @@ public class OrmLearnApplication implements CommandLineRunner {
 
         LOGGER.info("End");
     }
+
+     */
 
 
     /*
