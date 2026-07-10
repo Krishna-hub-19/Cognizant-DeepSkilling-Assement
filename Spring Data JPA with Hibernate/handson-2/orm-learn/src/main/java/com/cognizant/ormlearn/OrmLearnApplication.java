@@ -1,5 +1,6 @@
 package com.cognizant.ormlearn;
 
+import com.cognizant.ormlearn.model.Department;
 import com.cognizant.ormlearn.model.Employee;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,7 +33,8 @@ public class OrmLearnApplication implements CommandLineRunner {
         departmentService = context.getBean(DepartmentService.class);
         skillService = context.getBean(SkillService.class);
 
-        testGetEmployee();
+//      testGetEmployee();
+        testAddEmployee();
     }
 
     @Override
@@ -40,6 +42,7 @@ public class OrmLearnApplication implements CommandLineRunner {
         // Exercise 2 code commented out
     }
 
+    /*
     private static void testGetEmployee() {
 
         LOGGER.info("Start");
@@ -49,6 +52,33 @@ public class OrmLearnApplication implements CommandLineRunner {
         LOGGER.info("Employee: {}", employee);
 
         LOGGER.info("Department: {}", employee.getDepartment());
+
+        LOGGER.info("End");
+    }
+    */
+
+
+
+    private static void testAddEmployee() {
+
+        LOGGER.info("Start");
+
+        Employee employee = new Employee();
+
+        employee.setName("Krishna Garg");
+        employee.setSalary(75000);
+        employee.setPermanent(true);
+
+        employee.setDateOfBirth(
+                java.sql.Date.valueOf("2003-01-18"));
+
+        Department department = departmentService.get(1);
+
+        employee.setDepartment(department);
+
+        employeeService.save(employee);
+
+        LOGGER.info("Employee: {}", employee);
 
         LOGGER.info("End");
     }
