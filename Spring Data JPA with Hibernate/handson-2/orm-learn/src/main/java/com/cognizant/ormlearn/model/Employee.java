@@ -25,6 +25,19 @@ public class Employee {
     @Column(name = "em_date_of_birth")
     private Date dateOfBirth;
 
+    @ManyToOne
+    @JoinColumn(name = "em_dp_id")
+    private Department department;
+
+    
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     public Employee() {
     }
 
