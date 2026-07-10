@@ -35,7 +35,10 @@ public class OrmLearnApplication implements CommandLineRunner {
 
 //      testGetEmployee();
 //      testAddEmployee();
-        testUpdateEmployee();
+//      testUpdateEmployee();
+
+        testGetDepartment();
+
     }
 
     @Override
@@ -43,7 +46,20 @@ public class OrmLearnApplication implements CommandLineRunner {
         // Exercise 2 code commented out
     }
 
+    private static void testGetDepartment() {
 
+        LOGGER.info("Start");
+
+        Department department = departmentService.get(1);
+
+        LOGGER.info("Department: {}", department);
+
+        LOGGER.info("Employees: {}", department.getEmployeeList());
+
+        LOGGER.info("End");
+    }
+
+    /*
     private static void testUpdateEmployee() {
 
         LOGGER.info("Start");
@@ -60,6 +76,7 @@ public class OrmLearnApplication implements CommandLineRunner {
 
         LOGGER.info("End");
     }
+     */
 
 
     /*

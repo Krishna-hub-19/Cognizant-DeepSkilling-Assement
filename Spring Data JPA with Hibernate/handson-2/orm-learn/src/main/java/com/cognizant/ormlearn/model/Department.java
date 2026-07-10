@@ -1,6 +1,9 @@
 package com.cognizant.ormlearn.model;
 
 import jakarta.persistence.*;
+import java.util.List;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Table(name = "department")
@@ -13,6 +16,20 @@ public class Department {
 
     @Column(name = "dp_name")
     private String name;
+
+    @OneToMany(
+            mappedBy = "department",
+            fetch = FetchType.EAGER
+    )
+    private List<Employee> employeeList;
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
 
     public Department() {
     }
