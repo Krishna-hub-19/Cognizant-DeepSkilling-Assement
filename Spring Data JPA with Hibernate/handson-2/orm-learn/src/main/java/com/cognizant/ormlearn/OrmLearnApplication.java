@@ -33,11 +33,10 @@ public class OrmLearnApplication implements CommandLineRunner {
         departmentService = context.getBean(DepartmentService.class);
         skillService = context.getBean(SkillService.class);
 
-//      testGetEmployee();
+      testGetEmployee();
 //      testAddEmployee();
 //      testUpdateEmployee();
-
-        testGetDepartment();
+//      testGetDepartment();
 
     }
 
@@ -46,6 +45,23 @@ public class OrmLearnApplication implements CommandLineRunner {
         // Exercise 2 code commented out
     }
 
+    private static void testGetEmployee() {
+
+        LOGGER.info("Start");
+
+        Employee employee = employeeService.get(1);
+
+        LOGGER.info("Employee: {}", employee);
+
+        LOGGER.info("Department: {}", employee.getDepartment());
+
+        LOGGER.info("Skills: {}", employee.getSkillList());
+
+        LOGGER.info("End");
+    }
+
+
+    /*
     private static void testGetDepartment() {
 
         LOGGER.info("Start");
@@ -58,6 +74,7 @@ public class OrmLearnApplication implements CommandLineRunner {
 
         LOGGER.info("End");
     }
+     */
 
     /*
     private static void testUpdateEmployee() {
@@ -77,23 +94,6 @@ public class OrmLearnApplication implements CommandLineRunner {
         LOGGER.info("End");
     }
      */
-
-
-    /*
-    private static void testGetEmployee() {
-
-        LOGGER.info("Start");
-
-        Employee employee = employeeService.get(1);
-
-        LOGGER.info("Employee: {}", employee);
-
-        LOGGER.info("Department: {}", employee.getDepartment());
-
-        LOGGER.info("End");
-    }
-    */
-
 
     /*
     private static void testAddEmployee() {
