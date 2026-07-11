@@ -2,7 +2,11 @@ package com.cognizant.employeemanagementsystem.service;
 
 import com.cognizant.employeemanagementsystem.model.Employee;
 import com.cognizant.employeemanagementsystem.repository.EmployeeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -37,5 +41,23 @@ public class EmployeeService {
 
     public Employee getEmployeeByName(String name) {
         return employeeRepository.findByEmployeeName(name);
+    }
+
+    public Page<Employee> getEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
+    }
+
+    public List<Employee> getEmployeesSorted(String field) {
+        return employeeRepository.findAll(Sort.by(field));
+    }
+
+    public Page<Employee> getEmployees(Pageable pageable, String field) {
+        Pageable sortedPage =
+                PageRequest.of(
+                        pageable.getPageNumber(),
+                        pageable.getPageSize(),
+                        Sort.by(field));
+
+        return employeeRepository.findAll(sortedPage);
     }
 }
