@@ -54,4 +54,17 @@ public class EmployeeService {
 
         return averageSalary;
     }
+
+    @Transactional
+    public List<Employee> getAllEmployeesNative() {
+
+        LOGGER.info("Start");
+
+        List<Employee> employees =
+                employeeRepository.getAllEmployeesNative();
+
+        LOGGER.info("End");
+
+        return employees;
+    }
 }
