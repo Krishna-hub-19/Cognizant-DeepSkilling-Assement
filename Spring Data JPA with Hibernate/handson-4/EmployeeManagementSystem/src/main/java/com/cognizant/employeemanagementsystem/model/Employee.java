@@ -10,6 +10,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "department")
+@NamedQuery(
+        name = "Employee.findByEmployeeName",
+        query = "SELECT e FROM Employee e WHERE e.name = :name"
+)
+
 public class Employee {
 
     @Id
