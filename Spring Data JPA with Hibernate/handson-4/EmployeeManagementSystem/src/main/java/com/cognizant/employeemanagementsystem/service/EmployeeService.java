@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -69,5 +70,10 @@ public class EmployeeService {
 
     public List<EmployeeDTO> getEmployeeDTO() {
         return employeeRepository.getEmployeeDTO();
+    }
+
+    @Transactional
+    public List<Employee> saveAllEmployees(List<Employee> employees) {
+        return employeeRepository.saveAll(employees);
     }
 }

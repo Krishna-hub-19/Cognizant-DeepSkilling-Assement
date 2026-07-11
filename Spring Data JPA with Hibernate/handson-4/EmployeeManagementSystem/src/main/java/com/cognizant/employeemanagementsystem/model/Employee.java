@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
         query = "SELECT e FROM Employee e WHERE e.name = :name"
 )
 @EntityListeners(AuditingEntityListener.class)
+@DynamicUpdate
 public class Employee {
 
     @Id

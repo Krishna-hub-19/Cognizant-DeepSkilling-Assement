@@ -2,6 +2,7 @@ package com.cognizant.employeemanagementsystem.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString(exclude = "employees")
 @EntityListeners(AuditingEntityListener.class)
+@DynamicUpdate
 public class Department {
 
     @Id

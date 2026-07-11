@@ -68,4 +68,11 @@ public class EmployeeController {
     public List<EmployeeDTO> getEmployeeDTO() {
         return employeeService.getEmployeeDTO();
     }
+
+    @PostMapping("/batch")
+    public List<Employee> saveAllEmployees(
+            @RequestBody List<Employee> employees) {
+
+        return employeeService.saveAllEmployees(employees);
+    }
 }
