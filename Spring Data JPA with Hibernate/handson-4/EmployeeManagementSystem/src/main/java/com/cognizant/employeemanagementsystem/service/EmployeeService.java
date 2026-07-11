@@ -1,6 +1,8 @@
 package com.cognizant.employeemanagementsystem.service;
 
 import com.cognizant.employeemanagementsystem.model.Employee;
+import com.cognizant.employeemanagementsystem.projection.EmployeeDTO;
+import com.cognizant.employeemanagementsystem.projection.EmployeeView;
 import com.cognizant.employeemanagementsystem.repository.EmployeeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,5 +61,13 @@ public class EmployeeService {
                         Sort.by(field));
 
         return employeeRepository.findAll(sortedPage);
+    }
+
+    public List<EmployeeView> getEmployeeProjection() {
+        return employeeRepository.findAllProjectedBy();
+    }
+
+    public List<EmployeeDTO> getEmployeeDTO() {
+        return employeeRepository.getEmployeeDTO();
     }
 }

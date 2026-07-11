@@ -1,6 +1,8 @@
 package com.cognizant.employeemanagementsystem.controller;
 
 import com.cognizant.employeemanagementsystem.model.Employee;
+import com.cognizant.employeemanagementsystem.projection.EmployeeDTO;
+import com.cognizant.employeemanagementsystem.projection.EmployeeView;
 import com.cognizant.employeemanagementsystem.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
@@ -55,5 +57,15 @@ public class EmployeeController {
             @RequestParam String field) {
 
         return employeeService.getEmployees(pageable, field);
+    }
+
+    @GetMapping("/projection")
+    public List<EmployeeView> getEmployeeProjection() {
+        return employeeService.getEmployeeProjection();
+    }
+
+    @GetMapping("/dto")
+    public List<EmployeeDTO> getEmployeeDTO() {
+        return employeeService.getEmployeeDTO();
     }
 }
