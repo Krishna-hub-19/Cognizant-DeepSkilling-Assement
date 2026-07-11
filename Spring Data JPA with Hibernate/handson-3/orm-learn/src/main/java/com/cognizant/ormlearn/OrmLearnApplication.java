@@ -45,8 +45,10 @@ public class OrmLearnApplication implements CommandLineRunner {
 //      testGetDepartment();
 //      testAddSkillToEmployee();
 //      testGetAllPermanentEmployees();
+//      testGetQuizAttempt();
 
-        testGetQuizAttempt();
+        testGetAverageSalary();
+
 
 
     }
@@ -56,6 +58,18 @@ public class OrmLearnApplication implements CommandLineRunner {
         // Exercise 2 code commented out
     }
 
+    private static void testGetAverageSalary() {
+
+        LOGGER.info("Start");
+
+        double averageSalary = employeeService.getAverageSalary(1);
+
+        LOGGER.info("Average Salary: {}", averageSalary);
+
+        LOGGER.info("End");
+    }
+
+    /*
     private static void testGetQuizAttempt() {
 
         LOGGER.info("Start");
@@ -76,6 +90,7 @@ public class OrmLearnApplication implements CommandLineRunner {
 
         LOGGER.info("End");
     }
+     */
 
 
     /*

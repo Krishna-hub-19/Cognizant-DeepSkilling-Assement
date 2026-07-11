@@ -42,4 +42,16 @@ public class EmployeeService {
 
         return employees;
     }
+
+    @Transactional
+    public double getAverageSalary(int id) {
+
+        LOGGER.info("Start");
+
+        double averageSalary = employeeRepository.getAverageSalary(id);
+
+        LOGGER.info("End");
+
+        return averageSalary;
+    }
 }
