@@ -47,8 +47,11 @@ public class OrmLearnApplication implements CommandLineRunner {
 //      testGetAllPermanentEmployees();
 //      testGetQuizAttempt();
 //      testGetAverageSalary();
+//      testGetAllEmployeesNative();
 
-        testGetAllEmployeesNative();
+        testCriteriaQuery();
+
+
 
 
     }
@@ -58,6 +61,19 @@ public class OrmLearnApplication implements CommandLineRunner {
         // Exercise 2 code commented out
     }
 
+    private static void testCriteriaQuery() {
+
+        LOGGER.info("Start");
+
+        employeeService
+                .getPermanentEmployeesCriteria()
+                .forEach(employee ->
+                        LOGGER.info("{}", employee));
+
+        LOGGER.info("End");
+    }
+
+    /*
     private static void testGetAllEmployeesNative() {
 
         LOGGER.info("Start");
@@ -70,6 +86,7 @@ public class OrmLearnApplication implements CommandLineRunner {
 
         LOGGER.info("End");
     }
+     */
 
     /*
     private static void testGetAverageSalary() {

@@ -6,6 +6,12 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +25,9 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Transactional
     public Employee get(int id) {
@@ -62,6 +71,29 @@ public class EmployeeService {
 
         List<Employee> employees =
                 employeeRepository.getAllEmployeesNative();
+
+        LOGGER.info("End");
+
+        return employees;
+    }
+
+    @Transactional
+    public List<Employee> getPermanentEmployeesCriteria() {
+
+        LOGGER.info("Start");
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Employee> query =
+                builder.createQuery(Employee.class);
+
+        Root<Employee> root = query.from(Employee.class);
+
+        query.select(root)
+                .where(builder.equal(root.get("permanent"), true));
+
+        List<Employee> employees =
+                entityManager.createQuery(query).getResultList();
 
         LOGGER.info("End");
 
