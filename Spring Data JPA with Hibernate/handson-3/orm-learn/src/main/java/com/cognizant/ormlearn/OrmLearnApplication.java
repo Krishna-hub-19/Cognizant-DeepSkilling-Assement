@@ -1,8 +1,7 @@
 package com.cognizant.ormlearn;
 
-import com.cognizant.ormlearn.model.Department;
-import com.cognizant.ormlearn.model.Employee;
-import com.cognizant.ormlearn.model.Skill;
+import com.cognizant.ormlearn.model.*;
+import com.cognizant.ormlearn.service.AttemptService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +21,8 @@ public class OrmLearnApplication implements CommandLineRunner {
     private static DepartmentService departmentService;
     private static SkillService skillService;
 
+    private static AttemptService attemptService;
+
     private static final Logger LOGGER =
             LoggerFactory.getLogger(OrmLearnApplication.class);
 
@@ -36,14 +37,16 @@ public class OrmLearnApplication implements CommandLineRunner {
         departmentService = context.getBean(DepartmentService.class);
         skillService = context.getBean(SkillService.class);
 
+        attemptService = context.getBean(AttemptService.class);
+
 //      testGetEmployee();
 //      testAddEmployee();
 //      testUpdateEmployee();
 //      testGetDepartment();
 //      testAddSkillToEmployee();
+//      testGetAllPermanentEmployees();
 
-        testGetAllPermanentEmployees();
-
+        testGetQuizAttempt();
 
 
     }
@@ -53,6 +56,29 @@ public class OrmLearnApplication implements CommandLineRunner {
         // Exercise 2 code commented out
     }
 
+    private static void testGetQuizAttempt() {
+
+        LOGGER.info("Start");
+
+        Attempt attempt = attemptService.getAttemptDetail(1);
+
+        LOGGER.info("Attempt: {}", attempt);
+
+        LOGGER.info("User: {}", attempt.getUser());
+
+        for (AttemptQuestion aq : attempt.getAttemptQuestionList()) {
+
+            LOGGER.info("Question : {}", aq.getQuestion());
+
+            LOGGER.info("Selected Options : {}", aq.getAttemptOptionList());
+
+        }
+
+        LOGGER.info("End");
+    }
+
+
+    /*
     private static void testGetAllPermanentEmployees() {
 
         LOGGER.info("Start");
@@ -67,6 +93,7 @@ public class OrmLearnApplication implements CommandLineRunner {
 
         LOGGER.info("End");
     }
+     */
 
 
     /*
