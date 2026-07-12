@@ -62,7 +62,7 @@ public class EcommercePlatForm {
 }
 
 
-class Product{
+class Product1{
     int productId;
     String productName;
     String category;
