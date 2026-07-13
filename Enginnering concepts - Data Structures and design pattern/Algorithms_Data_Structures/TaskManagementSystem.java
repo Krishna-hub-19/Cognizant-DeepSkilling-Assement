@@ -101,7 +101,7 @@ class LinkedList<T>{
     }
 }
 
-public class TaskManageMentSystem {
+public class TaskManagementSystem {
 
     public static void main(String[] args) {
         /*
@@ -125,6 +125,33 @@ public class TaskManageMentSystem {
         - traverse -> O(n)
         - delete -> O(n)
         */
+
+
+//        ---- Demo ----
+        LinkedList<Task> tasks = new LinkedList<>();
+
+        Task t1 = new Task(101, "Design Database", "Pending");
+        Task t2 = new Task(102, "Develop API", "In Progress");
+        Task t3 = new Task(103, "Write Tests", "Pending");
+
+        // Add Tasks
+        tasks.add(t1);
+        tasks.add(t2);
+        tasks.add(t3);
+
+        // Traverse
+        System.out.println("Task List:");
+        tasks.traverse();
+
+        // Search
+        System.out.println("\n\nSearch Task: " + (tasks.search(t2) != null ? "Found" : "Not Found"));
+
+        // Delete
+        System.out.println("Delete Task: " + tasks.delete(t2));
+
+        // Traverse Again
+        System.out.println("\nTask List After Deletion:");
+        tasks.traverse();
     }
 }
 
@@ -133,4 +160,15 @@ class Task{
     int taskId;
     String taskName;
     String status;
+
+    Task(int taskId, String taskName, String status) {
+        this.taskId = taskId;
+        this.taskName = taskName;
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return taskName;
+    }
 }
