@@ -36,7 +36,7 @@ public class SortingCustomersOrders {
         }
     }
 
-    // helper function for qucikSort
+    // helper function for quickSort
     public static int partition(Order[] orders, int low, int high) {
 
         Order pivot = orders[high];
@@ -89,8 +89,38 @@ public class SortingCustomersOrders {
                      -> worst time complexity - O(n^2)
 
 
-        --> quick sort is generally prefered than bubble sort because it's average time complexity is O(n log n) while, time complexity of bubble sort is O(n^2) in avarage and worse both cases.
+        --> quick sort is generally prefer than bubble sort because it's average time complexity is O(n log n) while, time complexity of bubble sort is O(n^2) in average and worse both cases.
         */
+
+
+
+//        ---- Demo ----
+        SortingCustomersOrders sorter = new SortingCustomersOrders();
+
+        Order[] orders = {
+                new Order(101, "Laptop", 65000),
+                new Order(102, "Mouse", 700),
+                new Order(103, "Keyboard", 1500),
+                new Order(104, "Monitor", 12000)
+        };
+
+        // Bubble Sort Demo
+        Order[] bubbleOrders = orders.clone();
+        sorter.bubbleSort(bubbleOrders);
+
+        System.out.println("Bubble Sort:");
+        for (Order order : bubbleOrders) {
+            System.out.println(order.orderName + " - " + order.totalPrice);
+        }
+
+        // Quick Sort Demo
+        Order[] quickOrders = orders.clone();
+        sorter.quickSort(quickOrders, 0, quickOrders.length - 1);
+
+        System.out.println("\nQuick Sort:");
+        for (Order order : quickOrders) {
+            System.out.println(order.orderName + " - " + order.totalPrice);
+        }
     }
 }
 
@@ -98,4 +128,10 @@ class Order{
     int orderId;
     String orderName;
     double totalPrice;
+
+    Order(int orderId, String orderName, double totalPrice) {
+        this.orderId = orderId;
+        this.orderName = orderName;
+        this.totalPrice = totalPrice;
+    }
 }
