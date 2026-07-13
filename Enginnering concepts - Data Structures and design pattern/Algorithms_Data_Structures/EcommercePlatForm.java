@@ -5,8 +5,8 @@ import java.util.Arrays;
 // Exercise - 2
 public class EcommercePlatForm {
 
-    public boolean linearSearch(Product[] arr, Product target){
-        for(Product element : arr){
+    public boolean linearSearch(Product1[] arr, Product target){
+        for(Product1 element : arr){
             if(element.productId == target.productId) return true;
         }
 
@@ -14,7 +14,7 @@ public class EcommercePlatForm {
     }
 
 
-    public boolean binarySearch(Product[] arr, Product target){
+    public boolean binarySearch(Product[] arr, Product1 target){
         int start = 0;
         int end = arr.length - 1;
 
@@ -30,7 +30,7 @@ public class EcommercePlatForm {
     }
 
 
-    public  void sort(Product[] arr){
+    public  void sort(Product1[] arr){
         Arrays.sort(arr, (a, b) -> a.productId - b.productId);
     }
 

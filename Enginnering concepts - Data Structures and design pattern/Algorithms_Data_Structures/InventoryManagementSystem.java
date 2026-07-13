@@ -47,6 +47,7 @@ public class InventoryManagementSystem {
     public static void main(String[] args) {
 
 
+
         /* 
         ans.1 - They help store, search, update, and delete inventory efficiently
             1. HashMap - to find the product by productid
@@ -69,6 +70,35 @@ public class InventoryManagementSystem {
         
         --> since Hashmap already provides constant time for such operation so, we can not further optimized it.
         */
+
+
+//                  --- Demo ---
+        InventoryManagementSystem inventory = new InventoryManagementSystem();
+
+        // Add products
+        Product p1 = new Product();
+        p1.productName = "Laptop";
+        p1.quantity = 10;
+        p1.price = 50000;
+
+        Product p2 = new Product();
+        p2.productName = "Mouse";
+        p2.quantity = 25;
+        p2.price = 700;
+
+        inventory.add(p1);
+        inventory.add(p2);
+
+        // Update product with ID 1
+        Product updatedProduct = new Product();
+        updatedProduct.productName = "Gaming Laptop";
+        updatedProduct.quantity = 8;
+        updatedProduct.price = 65000;
+
+        System.out.println("Update Product: " + inventory.update(1, updatedProduct));
+
+        // Delete product with ID 2
+        System.out.println("Delete Product: " + inventory.delete(2));
 
     }
 }
