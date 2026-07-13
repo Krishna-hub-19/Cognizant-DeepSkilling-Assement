@@ -5,7 +5,7 @@ import java.util.Arrays;
 // Exercise - 2
 public class EcommercePlatForm {
 
-    public boolean linearSearch(Product1[] arr, Product target){
+    public boolean linearSearch(Product1[] arr, Product1 target){
         for(Product1 element : arr){
             if(element.productId == target.productId) return true;
         }
@@ -14,7 +14,7 @@ public class EcommercePlatForm {
     }
 
 
-    public boolean binarySearch(Product[] arr, Product1 target){
+    public boolean binarySearch(Product1[] arr, Product1 target){
         int start = 0;
         int end = arr.length - 1;
 
@@ -57,8 +57,31 @@ public class EcommercePlatForm {
         - binarySearch time complexity - O(log n)
 
         - Binary Search is more suitable for an e-commerce platform because products can be stored in sorted order. It provides O(log n) search time, making searches much faster than Linear Search for large inventories.*/
+
+
+
+//               ---- Demo ----
+        EcommercePlatForm platform = new EcommercePlatForm();
+
+        Product1[] products = {
+                new Product1(103, "Keyboard", "Electronics"),
+                new Product1(101, "Laptop", "Electronics"),
+                new Product1(105, "Mouse", "Electronics"),
+                new Product1(102, "Book", "Education")
+        };
+
+        Product1 target = new Product1(102, "Book", "Education");
+
+        // Linear Search
+        System.out.println("Linear Search: " + platform.linearSearch(products, target));
+
+        // Sort before Binary Search
+        platform.sort(products);
+
+        // Binary Search
+        System.out.println("Binary Search: " + platform.binarySearch(products, target));
     }
-    
+
 }
 
 
@@ -66,4 +89,10 @@ class Product1{
     int productId;
     String productName;
     String category;
+
+    Product1(int productId, String productName, String category){
+        this.productId = productId;
+        this.productName = productName;
+        this.category = category;
+    }
 }
