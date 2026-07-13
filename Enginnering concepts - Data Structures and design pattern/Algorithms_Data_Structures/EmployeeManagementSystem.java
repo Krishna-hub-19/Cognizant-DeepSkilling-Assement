@@ -57,7 +57,7 @@ public class EmployeeManagementSystem {
         ans.1 - Arrays are represented in the memory like a blocks where each block have their unique address, we can simply fetch the element using arrayName[position].
 
         Advantage:
-        - Arrays are faster for fetch the element. time complexsity - O(1)
+        - Arrays are faster for fetch the element. time complexity - O(1)
         - Arrays are more simpler to use then linkedList and ArrayList
         - Arrays consume less memory than linkedList and ArrayList
 
@@ -89,6 +89,32 @@ public class EmployeeManagementSystem {
         - if we already know the size in advanced.
         - if fast access O(1) is required.
         */
+
+
+//        ---- Demo ----
+        EmployeeManagementSystem system = new EmployeeManagementSystem();
+
+        Employee e1 = new Employee(101, "Krishna", "Developer", 50000);
+        Employee e2 = new Employee(102, "Rahul", "Tester", 40000);
+        Employee e3 = new Employee(103, "Aman", "Manager", 70000);
+
+        // Add Employees
+        system.add(e1);
+        system.add(e2);
+        system.add(e3);
+
+        // Search Employee
+        System.out.println("Employee found at index: " + system.search(e2));
+
+        // Traverse Employees
+        System.out.println("\nEmployee List:");
+        system.traverse();
+
+        // Delete Last Employee
+        System.out.println("\nDelete Employee: " + system.delete());
+
+        System.out.println("\nEmployee List After Deletion:");
+        system.traverse();
     }
 }
 
@@ -98,4 +124,13 @@ class Employee{
     String employeeName;
     String employeePosition;
     double employeeSalary;
+
+    Employee(int employeeId, String employeeName,
+             String employeePosition, double employeeSalary) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.employeePosition = employeePosition;
+        this.employeeSalary = employeeSalary;
+    }
+
 }
