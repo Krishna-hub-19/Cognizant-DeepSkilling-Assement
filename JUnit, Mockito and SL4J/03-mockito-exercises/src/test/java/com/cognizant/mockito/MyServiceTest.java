@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class MyServiceTest {
@@ -188,5 +189,28 @@ public class MyServiceTest {
 
         inOrder.verify(mockApi).logRequest("Transaction Started");
         inOrder.verify(mockApi).logResponse("Transaction Completed");
+    }
+
+    @Test
+    void testVoidMethodThrowsException() {
+
+        // Arrange
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        doThrow(new RuntimeException("Logging Failed"))
+                .when(mockApi)
+                .logRequest(anyString());
+
+        MyService service = new MyService(mockApi);
+
+        // Act & Assert
+        RuntimeException exception = assertThrows(
+                RuntimeException.class,
+                () -> service.processRequest("Login")
+        );
+
+        assertEquals("Logging Failed", exception.getMessage());
+
+        verify(mockApi).logRequest("Login");
     }
 }
