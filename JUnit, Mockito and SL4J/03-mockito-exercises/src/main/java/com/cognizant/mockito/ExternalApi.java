@@ -7,4 +7,6 @@ public interface ExternalApi {
     String getDataByCountry(String country);
 
     void logRequest(String request);
+
+    void logResponse(String response);
 }

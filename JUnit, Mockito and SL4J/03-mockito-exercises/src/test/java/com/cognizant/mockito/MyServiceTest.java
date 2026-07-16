@@ -1,6 +1,7 @@
 package com.cognizant.mockito;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -169,5 +170,23 @@ public class MyServiceTest {
         service.fetchData();
 
         verify(mockApi, times(3)).getData();
+    }
+
+    @Test
+    void testInteractionOrder() {
+
+        // Arrange
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        MyService service = new MyService(mockApi);
+
+        // Act
+        service.processTransaction();
+
+        // Assert
+        InOrder inOrder = inOrder(mockApi);
+
+        inOrder.verify(mockApi).logRequest("Transaction Started");
+        inOrder.verify(mockApi).logResponse("Transaction Completed");
     }
 }

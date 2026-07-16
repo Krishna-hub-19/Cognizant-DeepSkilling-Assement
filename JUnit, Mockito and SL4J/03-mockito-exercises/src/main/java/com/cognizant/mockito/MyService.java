@@ -19,4 +19,12 @@ public class MyService {
     public void processRequest(String request) {
         externalApi.logRequest(request);
     }
+
+    public void processTransaction() {
+
+        externalApi.logRequest("Transaction Started");
+
+        externalApi.logResponse("Transaction Completed");
+
+    }
 }
