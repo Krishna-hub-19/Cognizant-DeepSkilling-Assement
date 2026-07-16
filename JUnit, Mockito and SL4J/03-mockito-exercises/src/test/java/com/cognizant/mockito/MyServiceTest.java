@@ -53,4 +53,53 @@ public class MyServiceTest {
 
         verify(mockApi, times(2)).getData();
     }
+
+    @Test
+    void testAnyStringMatcher() {
+
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        when(mockApi.getDataByCountry(anyString()))
+                .thenReturn("Country Data");
+
+        MyService service = new MyService(mockApi);
+
+        String result = service.fetchCountryData("India");
+
+        assertEquals("Country Data", result);
+
+        verify(mockApi).getDataByCountry(anyString());
+    }
+
+    @Test
+    void testExactArgument() {
+
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        when(mockApi.getDataByCountry(eq("India")))
+                .thenReturn("Indian Data");
+
+        MyService service = new MyService(mockApi);
+
+        String result = service.fetchCountryData("India");
+
+        assertEquals("Indian Data", result);
+
+        verify(mockApi).getDataByCountry(eq("India"));
+    }
+
+    @Test
+    void testDifferentCountry() {
+
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        when(mockApi.getDataByCountry(anyString()))
+                .thenReturn("Country Data");
+
+        MyService service = new MyService(mockApi);
+
+        service.fetchCountryData("USA");
+
+        verify(mockApi).getDataByCountry("USA");
+    }
 }

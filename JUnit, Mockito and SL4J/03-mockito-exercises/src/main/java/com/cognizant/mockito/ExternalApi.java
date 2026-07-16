@@ -4,4 +4,5 @@ public interface ExternalApi {
 
     String getData();
 
+    String getDataByCountry(String country);
 }

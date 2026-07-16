@@ -12,4 +12,7 @@ public class MyService {
         return externalApi.getData();
     }
 
+    public String fetchCountryData(String country) {
+        return externalApi.getDataByCountry(country);
+    }
 }
