@@ -132,4 +132,42 @@ public class MyServiceTest {
 
         verify(mockApi, times(2)).logRequest(anyString());
     }
+
+    @Test
+    void testMultipleReturns() {
+
+        // Arrange
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        when(mockApi.getData())
+                .thenReturn("First Response")
+                .thenReturn("Second Response")
+                .thenReturn("Third Response");
+
+        MyService service = new MyService(mockApi);
+
+        // Act & Assert
+        assertEquals("First Response", service.fetchData());
+
+        assertEquals("Second Response", service.fetchData());
+
+        assertEquals("Third Response", service.fetchData());
+    }
+
+    @Test
+    void testMultipleReturnsAndVerify() {
+
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        when(mockApi.getData())
+                .thenReturn("One", "Two", "Three");
+
+        MyService service = new MyService(mockApi);
+
+        service.fetchData();
+        service.fetchData();
+        service.fetchData();
+
+        verify(mockApi, times(3)).getData();
+    }
 }
