@@ -15,4 +15,8 @@ public class MyService {
     public String fetchCountryData(String country) {
         return externalApi.getDataByCountry(country);
     }
+
+    public void processRequest(String request) {
+        externalApi.logRequest(request);
+    }
 }

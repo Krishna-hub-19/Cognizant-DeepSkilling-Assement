@@ -102,4 +102,34 @@ public class MyServiceTest {
 
         verify(mockApi).getDataByCountry("USA");
     }
+
+    @Test
+    void testVoidMethod() {
+
+        // Arrange
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        doNothing().when(mockApi).logRequest(anyString());
+
+        MyService service = new MyService(mockApi);
+
+        // Act
+        service.processRequest("User Login");
+
+        // Assert
+        verify(mockApi).logRequest("User Login");
+    }
+
+    @Test
+    void testMultipleVoidCalls() {
+
+        ExternalApi mockApi = mock(ExternalApi.class);
+
+        MyService service = new MyService(mockApi);
+
+        service.processRequest("Login");
+        service.processRequest("Logout");
+
+        verify(mockApi, times(2)).logRequest(anyString());
+    }
 }
