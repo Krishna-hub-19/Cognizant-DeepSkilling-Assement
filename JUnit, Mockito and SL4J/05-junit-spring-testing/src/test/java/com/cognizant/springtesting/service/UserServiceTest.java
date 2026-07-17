@@ -9,6 +9,11 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import com.cognizant.springtesting.exception.UserNotFoundException;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class UserServiceTest {
 
     @Test
@@ -46,10 +51,40 @@ class UserServiceTest {
 
         UserService userService = new UserService(mockRepository);
 
-        User result = userService.getUserById(10L);
+        UserNotFoundException exception = assertThrows(
+                UserNotFoundException.class,
+                () -> userService.getUserById(10L)
+        );
 
-        assertNull(result);
+        assertEquals(
+                "User not found with id: 10",
+                exception.getMessage()
+        );
 
         verify(mockRepository).findById(10L);
+    }
+
+    @Test
+    void testGetUserByIdThrowsException() {
+
+        UserRepository mockRepository = mock(UserRepository.class);
+
+        when(mockRepository.findById(100L))
+                .thenReturn(Optional.empty());
+
+        UserService userService = new UserService(mockRepository);
+
+        UserNotFoundException exception = assertThrows(
+                UserNotFoundException.class,
+                () -> userService.getUserById(100L)
+        );
+
+        assertEquals(
+                "User not found with id: 100",
+                exception.getMessage()
+        );
+
+        verify(mockRepository).findById(100L);
+
     }
 }

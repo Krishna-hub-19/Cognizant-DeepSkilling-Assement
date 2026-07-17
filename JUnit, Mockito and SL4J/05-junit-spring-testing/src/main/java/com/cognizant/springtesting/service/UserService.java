@@ -1,6 +1,7 @@
 package com.cognizant.springtesting.service;
 
 import com.cognizant.springtesting.entity.User;
+import com.cognizant.springtesting.exception.UserNotFoundException;
 import com.cognizant.springtesting.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,11 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+
+        return userRepository.findById(id)
+                .orElseThrow(() ->
+                        new UserNotFoundException("User not found with id: " + id));
+
     }
 
     public User saveUser(User user) {
