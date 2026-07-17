@@ -1,0 +1,83 @@
+package com.cognizant.springtesting.controller;
+
+import com.cognizant.springtesting.entity.User;
+import com.cognizant.springtesting.service.UserService;
+import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.when;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import org.springframework.http.MediaType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
+import com.cognizant.springtesting.exception.UserNotFoundException;
+
+@WebMvcTest(UserController.class)
+class UserControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockitoBean
+    private UserService userService;
+
+    @Test
+    void testGetUser() throws Exception {
+
+        User user = new User(1L, "Krishna");
+
+        when(userService.getUserById(1L))
+                .thenReturn(user);
+
+        mockMvc.perform(get("/users/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("Krishna"));
+
+    }
+
+    @Test
+    void testCreateUser() throws Exception {
+
+        User user = new User(1L, "Krishna");
+
+        when(userService.saveUser(any(User.class)))
+                .thenReturn(user);
+
+        mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                    {
+                        "id":1,
+                        "name":"Krishna"
+                    }
+                    """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("Krishna"));
+
+    }
+
+    @Test
+    void testGetUserNotFound() throws Exception {
+
+        when(userService.getUserById(100L))
+                .thenThrow(new UserNotFoundException("User not found with id: 100"));
+
+        mockMvc.perform(get("/users/100"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("User not found with id: 100"));
+
+    }
+}
