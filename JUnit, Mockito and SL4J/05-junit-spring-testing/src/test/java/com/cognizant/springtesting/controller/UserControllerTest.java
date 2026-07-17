@@ -15,6 +15,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import org.springframework.http.MediaType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
 @WebMvcTest(UserController.class)
 class UserControllerTest {
 
@@ -39,4 +43,25 @@ class UserControllerTest {
 
     }
 
+    @Test
+    void testCreateUser() throws Exception {
+
+        User user = new User(1L, "Krishna");
+
+        when(userService.saveUser(any(User.class)))
+                .thenReturn(user);
+
+        mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                    {
+                        "id":1,
+                        "name":"Krishna"
+                    }
+                    """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("Krishna"));
+
+    }
 }
