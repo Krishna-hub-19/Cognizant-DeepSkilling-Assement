@@ -19,6 +19,10 @@ import org.springframework.http.MediaType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
+import com.cognizant.springtesting.exception.UserNotFoundException;
+
 @WebMvcTest(UserController.class)
 class UserControllerTest {
 
@@ -62,6 +66,18 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("Krishna"));
+
+    }
+
+    @Test
+    void testGetUserNotFound() throws Exception {
+
+        when(userService.getUserById(100L))
+                .thenThrow(new UserNotFoundException("User not found with id: 100"));
+
+        mockMvc.perform(get("/users/100"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("User not found with id: 100"));
 
     }
 }
