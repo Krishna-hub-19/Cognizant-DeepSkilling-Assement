@@ -7,6 +7,9 @@
 # Build output
 out/
 
+# Maven build output
+**/target/
+
 # Compiled Java files
 *.class
 
