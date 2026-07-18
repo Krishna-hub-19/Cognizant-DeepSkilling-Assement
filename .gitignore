@@ -9,3 +9,9 @@ out/
 
 # Compiled Java files
 *.class
+
+# Ignore log files
+*.log
+
+# Ignore log directories
+logs/
