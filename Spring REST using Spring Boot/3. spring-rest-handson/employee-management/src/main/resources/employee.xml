@@ -160,4 +160,16 @@
 
     </bean>
 
+    <bean id="departmentList"
+          class="java.util.ArrayList">
+
+        <constructor-arg>
+            <list>
+                <ref bean="deptIT"/>
+                <ref bean="deptHR"/>
+                <ref bean="deptFinance"/>
+            </list>
+        </constructor-arg>
+
+    </bean>
 </beans>
