@@ -2,6 +2,7 @@ package com.cognizant.springlearn.controller;
 
 import com.cognizant.springlearn.Country;
 import com.cognizant.springlearn.service.CountryService;
+import com.cognizant.springlearn.service.exception.CountryNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,8 @@ public class CountryController {
     }
 
     @GetMapping("/countries/{code}")
-    public Country getCountry(@PathVariable String code) {
+    public Country getCountry(@PathVariable String code)
+            throws CountryNotFoundException {
 
         LOGGER.info("START");
 
