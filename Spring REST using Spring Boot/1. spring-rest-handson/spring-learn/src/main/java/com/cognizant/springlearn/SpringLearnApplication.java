@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @SpringBootApplication
@@ -22,7 +23,9 @@ public class SpringLearnApplication {
 
         displayDate();
 
-        displayCountry();
+//        displayCountry();
+
+        displayCountries();
 
     }
 
@@ -68,6 +71,23 @@ public class SpringLearnApplication {
         LOGGER.debug("Country 2 : {}", anotherCountry);
 
         LOGGER.info("Same Object : {}", country == anotherCountry);
+
+        LOGGER.info("END");
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public static void displayCountries() {
+
+        LOGGER.info("START");
+
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("country.xml");
+
+        ArrayList<Country> countryList =
+                context.getBean("countryList", ArrayList.class);
+
+        LOGGER.debug("Countries : {}", countryList);
 
         LOGGER.info("END");
     }
