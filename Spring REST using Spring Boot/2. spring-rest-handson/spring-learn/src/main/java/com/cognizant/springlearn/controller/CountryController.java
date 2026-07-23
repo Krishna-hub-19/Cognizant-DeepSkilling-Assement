@@ -5,8 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CountryController {
@@ -30,5 +34,25 @@ public class CountryController {
         LOGGER.info("END");
 
         return country;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @GetMapping("/countries")
+    public List<Country> getAllCountries() {
+
+        LOGGER.info("START");
+
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("country.xml");
+
+        List<Country> countryList =
+                context.getBean("countryList", ArrayList.class);
+
+        LOGGER.debug("Countries : {}", countryList);
+
+        LOGGER.info("END");
+
+        return countryList;
     }
 }
