@@ -1,4 +1,4 @@
-package com.cognizant.spring_learn;
+package com.cognizant.springlearn;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +21,9 @@ public class SpringLearnApplication {
         SpringApplication.run(SpringLearnApplication.class, args);
 
         displayDate();
+
+        displayCountry();
+
     }
 
     public static void displayDate() {
@@ -44,6 +47,21 @@ public class SpringLearnApplication {
             LOGGER.error("Exception occurred while parsing date", e);
 
         }
+
+        LOGGER.info("END");
+    }
+
+    public static void displayCountry() {
+
+        LOGGER.info("START");
+
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("country.xml");
+
+        Country country =
+                context.getBean("country", Country.class);
+
+        LOGGER.debug("Country : {}", country);
 
         LOGGER.info("END");
     }
