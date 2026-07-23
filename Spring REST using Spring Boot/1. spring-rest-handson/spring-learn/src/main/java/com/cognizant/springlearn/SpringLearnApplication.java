@@ -61,7 +61,13 @@ public class SpringLearnApplication {
         Country country =
                 context.getBean("country", Country.class);
 
-        LOGGER.debug("Country : {}", country);
+        Country anotherCountry =
+                context.getBean("country", Country.class);
+
+        LOGGER.debug("Country 1 : {}", country);
+        LOGGER.debug("Country 2 : {}", anotherCountry);
+
+        LOGGER.info("Same Object : {}", country == anotherCountry);
 
         LOGGER.info("END");
     }
