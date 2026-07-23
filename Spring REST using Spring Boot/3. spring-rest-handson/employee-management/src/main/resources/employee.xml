@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- ========================= -->
+    <!-- Departments -->
+    <!-- ========================= -->
+
+    <bean id="deptIT"
+          class="com.cognizant.employeemanagement.model.Department">
+        <property name="id" value="1"/>
+        <property name="name" value="IT"/>
+    </bean>
+
+    <bean id="deptHR"
+          class="com.cognizant.employeemanagement.model.Department">
+        <property name="id" value="2"/>
+        <property name="name" value="HR"/>
+    </bean>
+
+    <bean id="deptFinance"
+          class="com.cognizant.employeemanagement.model.Department">
+        <property name="id" value="3"/>
+        <property name="name" value="Finance"/>
+    </bean>
+
+    <!-- ========================= -->
+    <!-- Skills -->
+    <!-- ========================= -->
+
+    <bean id="javaSkill"
+          class="com.cognizant.employeemanagement.model.Skill">
+        <property name="id" value="1"/>
+        <property name="name" value="Java"/>
+    </bean>
+
+    <bean id="springSkill"
+          class="com.cognizant.employeemanagement.model.Skill">
+        <property name="id" value="2"/>
+        <property name="name" value="Spring Boot"/>
+    </bean>
+
+    <bean id="sqlSkill"
+          class="com.cognizant.employeemanagement.model.Skill">
+        <property name="id" value="3"/>
+        <property name="name" value="SQL"/>
+    </bean>
+
+    <bean id="angularSkill"
+          class="com.cognizant.employeemanagement.model.Skill">
+        <property name="id" value="4"/>
+        <property name="name" value="Angular"/>
+    </bean>
+
+    <!-- ========================= -->
+    <!-- Skill Lists -->
+    <!-- ========================= -->
+
+    <bean id="skillList1" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="javaSkill"/>
+                <ref bean="springSkill"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="skillList2" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="angularSkill"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="skillList3" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="sqlSkill"/>
+                <ref bean="javaSkill"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- ========================= -->
+    <!-- Employees -->
+    <!-- ========================= -->
+
+    <bean id="emp1"
+          class="com.cognizant.employeemanagement.model.Employee">
+
+        <property name="id" value="101"/>
+        <property name="name" value="John Smith"/>
+        <property name="salary" value="85000"/>
+        <property name="permanent" value="true"/>
+        <property name="dateOfBirth" value="1995/05/15"/>
+        <property name="department" ref="deptIT"/>
+        <property name="skills" ref="skillList1"/>
+
+    </bean>
+
+    <bean id="emp2"
+          class="com.cognizant.employeemanagement.model.Employee">
+
+        <property name="id" value="102"/>
+        <property name="name" value="Mary Johnson"/>
+        <property name="salary" value="72000"/>
+        <property name="permanent" value="true"/>
+        <property name="dateOfBirth" value="1994/02/11"/>
+        <property name="department" ref="deptHR"/>
+        <property name="skills" ref="skillList2"/>
+
+    </bean>
+
+    <bean id="emp3"
+          class="com.cognizant.employeemanagement.model.Employee">
+
+        <property name="id" value="103"/>
+        <property name="name" value="David Miller"/>
+        <property name="salary" value="93000"/>
+        <property name="permanent" value="true"/>
+        <property name="dateOfBirth" value="1992/10/20"/>
+        <property name="department" ref="deptFinance"/>
+        <property name="skills" ref="skillList3"/>
+
+    </bean>
+
+    <bean id="emp4"
+          class="com.cognizant.employeemanagement.model.Employee">
+
+        <property name="id" value="104"/>
+        <property name="name" value="Sarah Wilson"/>
+        <property name="salary" value="88000"/>
+        <property name="permanent" value="false"/>
+        <property name="dateOfBirth" value="1996/07/08"/>
+        <property name="department" ref="deptIT"/>
+        <property name="skills" ref="skillList1"/>
+
+    </bean>
+
+    <!-- ========================= -->
+    <!-- Employee List -->
+    <!-- ========================= -->
+
+    <bean id="employeeList"
+          class="java.util.ArrayList">
+
+        <constructor-arg>
+            <list>
+                <ref bean="emp1"/>
+                <ref bean="emp2"/>
+                <ref bean="emp3"/>
+                <ref bean="emp4"/>
+            </list>
+        </constructor-arg>
+
+    </bean>
+
+</beans>
